@@ -10,8 +10,8 @@
     "prestart": "npm run build"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.9.1",
-    "@prisma/client": "^7.9.1",
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^7.10.0",
     "chalk": "^5.6.2",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.4.2",
@@ -24,11 +24,11 @@
     "@types/express": "^5.0.5",
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.10.0",
-    "@types/pg": "^8.21.0",
+    "@types/pg": "^8.23.1",
     "copyfiles": "^2.4.1",
     "eslint": "^9.39.0",
     "prettier": "^3.6.2",
-    "prisma": "^7.9.1",
+    "prisma": "^8.0.0-rc.13",
     "rimraf": "^6.1.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
@@ -36,7 +36,7 @@
   "type": "module",
   "allowScripts": {
     "esbuild@0.28.2": true,
-    "@prisma/engines@7.9.1": true,
-    "prisma@7.9.1": true
+    "msgpackr-extract@3.0.4": true,
+    "workerd@1.20260704.1": true
   }
 }
