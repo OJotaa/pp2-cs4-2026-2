@@ -1,0 +1,20 @@
+### Inserção do primeiro cliente — aula de 10/09
+POST http://localhost:8888/customers
+Content-Type: application/json
+
+{
+  "name": "Mariana Alves Pereira",
+  "ident_document": "12345678901",
+  "birth_date": "1992-04-18T00:00:00.000Z",
+  "street_name": "Rua das Acácias",
+  "house_number": "145",
+  "complements": "Apto 32",
+  "district": "Jardim América",
+  "municipality": "Franca",
+  "state": "SP",
+  "phone": "16991234567",
+  "email": "mariana.pereira@example.com"
+}
+
+### Verificar o registro criado
+GET http://localhost:8888/customers
