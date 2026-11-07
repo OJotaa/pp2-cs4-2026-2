@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { useNavigate, useParams } from 'react-router'
 
 
@@ -56,8 +56,8 @@ const states = [
 
 // Função para interpretar e dar mensagens de erro mais
 // inteligíveis aos erros de fetch()
-async function getErrorMessage(response) {
- const error = await response.json().catch(() => null)
+async function getErrorMessage(response: Response): Promise<string> {
+ const error = await response.json().catch(() => null) as { message?: string } | null
  return error?.message || `A requisição falhou (HTTP ${response.status}).`
 }
 
@@ -77,7 +77,7 @@ export function CustomersForm() {
  // Quando o formulário estiver sendo usado para alterar os dados de
  // um usuário já existente, loadData() será chamado para buscar esses
  // dados no back-end para que os campos já apareçam preenchidos
- async function loadData(active) {
+ async function loadData(active: boolean) {
    setLoading(true)
    setLoadFailed(false)
    setFormModified(false)
@@ -118,10 +118,11 @@ export function CustomersForm() {
        })
      }
    }
-   catch (error) {
+   catch (error: unknown) {
      if (active) {
        setLoadFailed(true)
-       window.alert(`Não foi possível carregar o cliente. ${error.message}`)
+       const message = error instanceof Error ? error.message : 'Erro desconhecido.'
+       window.alert(`Não foi possível carregar o cliente. ${message}`)
      }
    }
    finally {
@@ -150,7 +151,7 @@ export function CustomersForm() {
 
  // Toda vez que o valor de um campo for alterado, esta função será chamada
  // para preencher o campo correspondente da variável de estado `customer`
- function handleFieldChange(event) {
+ function handleFieldChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
    const { name, value } = event.target
 
 
@@ -159,7 +160,7 @@ export function CustomersForm() {
  }
 
 
- async function handleFormSubmit(event) {
+ async function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
    event.preventDefault()
 
 
@@ -215,8 +216,9 @@ export function CustomersForm() {
      window.alert('Cliente salvo com sucesso.')
      navigate('/customers') // Retorna à página do formulário
    }
-   catch (error) {
-     window.alert(`Não foi possível salvar o cliente. ${error.message}`)
+   catch (error: unknown) {
+     const message = error instanceof Error ? error.message : 'Erro desconhecido.'
+     window.alert(`Não foi possível salvar o cliente. ${message}`)
    }
    finally {
      setLoading(false)
